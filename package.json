@@ -1,0 +1,24 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "my bot of discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --no-timeout",
+    "start": "node index.js"
+  },
+  "author": "hsuallan",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "got": "^9.6.0",
+    "metascraper": "^5.6.0",
+    "metascraper-description": "^5.6.0",
+    "metascraper-title": "^5.6.0",
+    "metascraper-url": "^5.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "should": "^13.2.3"
+  }
+}
