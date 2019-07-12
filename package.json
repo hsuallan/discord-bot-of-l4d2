@@ -12,10 +12,7 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "got": "^9.6.0",
-    "metascraper": "^5.6.0",
-    "metascraper-description": "^5.6.0",
-    "metascraper-title": "^5.6.0",
-    "metascraper-url": "^5.6.0"
+    "node-html-parser": "^1.1.16"
   },
   "devDependencies": {
     "mocha": "^6.1.4",

@@ -3,11 +3,10 @@ const cfg = require('../cfg.json')
 const client = new Discord.Client()
 describe('bot test',()=>{
     it('correct token' ,done =>{
-        client.login(cfg.token)
-        .then(()=>{
+        client.on('ready',()=>{
             client.destroy()
             done()
         })
-        .catch((err)=>done(err))
+        client.login(cfg.token).catch(err=>{throw err})
     })
 })

@@ -2,28 +2,33 @@ const Discord = require('discord.js')
 const cfg = require('./cfg.json')
 const client = new Discord.Client()
 const post = require('./post')
+const fs = require('fs')
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
 });
 
 client.on('message', async msg => {
-  //!hello 1 2 3 4 5 =>[1,2,3,4,5]
   const args = msg.content.slice(cfg.CmdPrefix.length).trim().split(/ +/g)
-  //!hello 1 2 3 =>hello
   const cmd = args.shift().toLowerCase()
-  //!hello 1 2 3 4 5 => 1 2 3 4 5
-  const onlycmd = msg.content.slice(cfg.CmdPrefix.length+command.length).trim()
-  //ignore bots message
   if(msg.author.bot) return;
-  if (/gamemaps/.test(msg.content)) {
+  if (/gamemaps|steam/.test(msg.content)) {
       const data = await post(msg.content)
       msg.channel.send(`${data.title} have been added successfully`)
   }
   if(cmd == 'finished'){
-    msg.channel.send(`${onlycmd} is finished at ${msg.createdAt }`)
+    msg.channel.send(`${args.join(' ').toString()} is finished at ${msg.createdAt }`)
   }
   if(cmd == 'played'){
     
+  }
+  if(cmd =='help'){
+    msg.channel.send(
+      `指令說明：
+        發送含有工作坊 or gamemaps的連結會自動加入追蹤
+        \`!finished mapname/url\` 將map標示為已完成
+        \`!played (num)\` 發送遊玩過的列表，最近num筆
+      `
+    )
   }
 });
 
