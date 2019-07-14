@@ -14,7 +14,7 @@ client.on('message', async msg => {
   const cmd = args.shift().toLowerCase()
   if(msg.author.bot) return;
   if (/gamemaps|workshop/.test(msg.content)&&args.length == 0) {
-    if(await db.is_reapeat(data)){
+    if(await db.is_reapeat(msg.content)){
       msg.channel.send(`${ans.title} have been played`)
     }
     else{
