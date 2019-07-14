@@ -12,6 +12,7 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "got": "^9.6.0",
+    "mongoose": "^5.6.4",
     "node-html-parser": "^1.1.16"
   },
   "devDependencies": {
