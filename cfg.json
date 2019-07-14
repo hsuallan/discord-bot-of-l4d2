@@ -1,6 +1,6 @@
 {
    "token" : "NTk4NTA1NDU1NjY4NjkwOTc0.XSXpUQ.-rqZfNQawvmCvvZOv5cZMA--KK4",
    "CmdPrefix" : "!",
-   "db":"mongodb://127.0.0.1/deploy",
-   "testdb":"mongodb://127.0.0.1/test"
+   "db":"mongodb://10.1.1.4/deploy",
+   "testdb":"mongodb://10.1.1.4/test"
 }
