@@ -3,7 +3,7 @@ const cfg = require('./cfg.json')
 const post = require('./post')
 const crud  = require("./db/index")
 const db = new crud()
-db.connect(cfg.testdb)
+db.connect(cfg.db)
 const client = new Discord.Client()
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
