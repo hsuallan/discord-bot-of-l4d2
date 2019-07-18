@@ -31,12 +31,12 @@ describe('DB test',()=>{
         ans.should.equal(1)
     })
     it('data is not in Document',async ()=>{
-        const ans = await db.is_reapeat('aaa')
-        ans.should.equal(true)
+        const {r,ans} = await db.is_reapeat('aaa')
+        r.should.equal(true)
     })
     it('data is in Document ',async ()=>{
-        const ans = await db.is_reapeat('bbb')
-        ans.should.equal(false)
+        const {r,ans} = await db.is_reapeat('bbb')
+        r.should.equal(false)
     })
     it('now',async ()=>{
         const test = {'title':'12345','url':'https://now.jpg'}

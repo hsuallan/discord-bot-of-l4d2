@@ -18,7 +18,8 @@ class crud {
         })
     }
     async is_reapeat(data){
-        return  await this.map_find(data) === null ? false : true   
+        const a = await this.map_find(data)   
+        return a === null ? {r:false,ans:null} : {r:true,ans: a}
     }
     async addMap(map){
         if(map.time == undefined) map.time = 0

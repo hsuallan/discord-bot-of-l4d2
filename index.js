@@ -3,18 +3,19 @@ const cfg = require('./cfg.json')
 const post = require('./post')
 const crud  = require("./db/index")
 const db = new crud()
-db.connect(cfg.db)
+db.connect(cfg.testdb)
 const client = new Discord.Client()
-client.on('ready', () => {
+client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
+  client.user.setActivity('!help',{type:"PLAYING"})
 });
-
 client.on('message', async msg => {
   const args = msg.content.slice(cfg.CmdPrefix.length).trim().split(/ +/g)
   const cmd = args.shift().toLowerCase()
   if(msg.author.bot) return;
   if (/gamemaps|workshop/.test(msg.content)&&args.length == 0) {
-    if(await db.is_reapeat(msg.content)){
+    const {r,ans} = await db.is_reapeat(msg.content)
+    if(r){
       msg.channel.send(`${ans.title} have been played`)
     }
     else{
@@ -29,22 +30,35 @@ client.on('message', async msg => {
     }
     }
   if(cmd == 'finished'){
+    if(args.length == 0){
+      msg.channel.send(`This command have to at least one argument to work fine`) 
+    }
     db.change_to_finish(args.join(' ').toString(),msg.createdAt).then((n)=>{
-      msg.channel.send(`${args.join(' ').toString()} is finished at ${msg.createdAt }`) 
+      if(n ==0){
+        msg.channel.send(`Sorry Didn't find the map`) 
+      }else{
+        msg.channel.send(`${args.join(' ').toString()} is finished at ${msg.createdAt }`) 
+      }
+      
     })
   }
   if(cmd == 'played'){
     let num = args.length  == 0 ? 0 : parseInt(args[0])
     const data = await db.finished(num)
     let res = new String()
-    data.forEach((e,i) => {
-      res=res.concat(`${i+1}. ${e.title} is finished at ${new Date(e.time).toDateString()},url is ${e.url}`,'\n')
+    data.forEach(({title,time,url},i) => {
+      res=res.concat(`${i+1}. ${title} is finished at ${new Date(time).toDateString()},url is ${url}`,'\n')
     });
     msg.channel.send(res)
   }
   if(cmd == 'now'){
     const data = await db.now()
-    msg.channel.send(`now playing ${data.url}`)
+    if(data === null){
+      msg.channel.send(`Playing queue is empty,maybe ypu can find some`)
+    }
+    else{
+      msg.channel.send(`now playing ${data.url}`)
+    }
   }
   if(cmd =='help'){
     msg.channel.send(
