@@ -14,7 +14,7 @@ client.on('message', async msg => {
   const cmd = args.shift().toLowerCase()
   const admin = msg.member.roles.has('424244648085815296');//true or false
   if(msg.author.bot) return;
-  if (/gamemaps|workshop/.test(msg.content)&&args.length == 0) {
+  if (/gamemaps|steamcommunity/.test(msg.content)&&args.length == 0) {
     if(admin){
       const {r,ans} = await db.is_reapeat(msg.content)
       if(r){
